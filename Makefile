@@ -1,10 +1,22 @@
 CC := clang
 
-all: mp2
+all: hyp ratio fib
 
-mp2: driver.o student.o
-	$(CC) -g -z noexecstack -o $@ driver.o student.o
+%.o: %.c
+	$(CC) -g -c -o $@ $<
+
+%.o: %.S
+	$(CC) -g -c -o $@ $<
+
+hyp: hyp.o control.o
+	$(CC) -g -z noexecstack -o $@ hyp.o control.o
+
+ratio: ratio.o control.o
+	$(CC) -g -z noexecstack -o $@ ratio.o control.o
+
+fib: fib.o control.o
+	$(CC) -g -z noexecstack -o $@ fib.o control.o
 
 clean:
-	rm -f mp2 driver.o student.o
+	rm -f hyp ratio fib *.o
 
